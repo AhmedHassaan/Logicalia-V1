@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     String result = "";
     String statement = "";
     int open = 0,close = 0;
-
+    HistoryData historyData;
     ImageButton delete;
 
     //get Precedence from operators
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         chars = new Stack<>();
-
+        historyData = new HistoryData(this);
         textView = (TextSwitcher) findViewById(R.id.editText);
         textView.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
@@ -329,10 +329,12 @@ public class MainActivity extends AppCompatActivity {
         Animation out = AnimationUtils.loadAnimation(this, android.R.anim.fade_out);
         textView.setInAnimation(in);
         textView.setOutAnimation(out);
-        textView.setText("Infix = " + statement
+        String finalResult = "Infix = " + statement
                 + "\n" + "PostFix = " + result
                 + "\n" + "Let " + assumingValue
-                + "\n" + "Truth Value is " + answer.pop());
+                + "\n" + "Truth Value is " + answer.pop();
+        textView.setText(finalResult);
+        historyData.putOne(finalResult);
         textView.clearAnimation();
         statement = "";
         character.clear();
