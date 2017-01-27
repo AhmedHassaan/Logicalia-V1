@@ -27,6 +27,7 @@ public class History extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         list = (ListView)findViewById(R.id.list);
         list.setClickable(false);
+        list.setDivider(null);
         historyData = new HistoryData(this);
         history = new ArrayList<>();
         history = historyData.getAll();
